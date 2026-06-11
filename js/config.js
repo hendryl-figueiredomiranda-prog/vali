@@ -2,4 +2,4 @@
 // CONFIGURAÇÃO DA API
 // =========================
 
-const API_URL = "https://vali-n2mj.onrender.com";
+const API_URL = "https://vali-turismo.onrender.com";
