@@ -71,7 +71,7 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(List.of(
                         "http://127.0.0.1:3000",
                         "http://localhost:3000",
-                        "https://visionary-fairy-270026.netlify.app"));
+                        "https://vali-turismo.netlify.app"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
