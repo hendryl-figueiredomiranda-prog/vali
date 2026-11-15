@@ -1,30 +1,45 @@
+/* ============================================================
+   ESTILOS GLOBAIS — REDESIGN
+   Preserva os nomes das classes, as variáveis originais,
+   a identidade visual, a logo e o comportamento do menu mobile.
+   Feito para funcionar junto com home-refinado.css.
+   ============================================================ */
+
 /* =========================
-   RESET
-========================= */
-* {
+   1. RESET E BASE
+   ========================= */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+  -webkit-text-size-adjust: 100%;
+}
 
 /* =========================
-   VARIÁVEIS
-========================= */
+   2. VARIÁVEIS DO PROJETO
+   ========================= */
 :root {
+  /* Identidade visual original — não alterar as cores da marca */
   --color-white: #ffffff;
   --color-black: #000000;
   --color-brand-blue: #0d0166;
   --color-brand-red: #a30000;
   --color-brand-gray: #dad9d9;
 
-  /* Categorias */
+  /* Categorias — mantidas */
   --color-natureza: #2e7d32;
   --color-restaurantes: #c62828;
   --color-bares: #f9a825;
   --color-eventos: #1565c0;
 
-  /* Fontes */
+  /* Fontes — nomes originais preservados */
   --font-size-small: 0.9rem;
   --font-size-normal: 1rem;
   --font-size-medium: 1.12rem;
@@ -39,117 +54,54 @@
   --font-bold: 700;
   --font-extrabold: 900;
 
-  /* Bordas */
+  /* Bordas — nomes originais preservados */
   --border-radius-thin: 3px;
   --border-radius-small: 8px;
   --border-radius-medium: 30px;
   --border-radius-circle: 50%;
 
-  /* Layout */
+  /* Layout — mantido */
   --site-max-width: 1300px;
+
+  /* Novos auxiliares de estilo */
+  --global-fundo: #f7f9fd;
+  --global-texto: #1d2738;
+  --global-texto-suave: #68768a;
+  --global-borda: #e5eaf2;
+  --global-navbar: #090e27;
+  --global-footer: #090d1c;
+  --global-footer-texto: #c9d2e1;
+  --global-header-height: 90px;
+  --global-sombra-header: 0 8px 35px rgba(9, 14, 39, 0.17);
+  --global-sombra-menu: 0 12px 30px rgba(9, 14, 39, 0.12);
+  --global-transicao: 0.28s cubic-bezier(0.2, 0.75, 0.3, 1);
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
-.rodape {
-  background: var(--color-black);
-  color: var(--color-white);
-
-  font-family: "Poppins", sans-serif;
-}
-
-.rodape-conteudo {
-  display: grid;
-  grid-template-columns: 1.4fr repeat(4, 1fr);
-  gap: 36px;
-
-  padding-top: 56px;
-  padding-bottom: 42px;
-}
-
-.rodape-logo-area {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.rodape-logo {
-  width: 86px;
-}
-
-.rodape-descricao {
-  max-width: 260px;
-
-  color: var(--color-brand-gray);
-
-  font-size: var(--font-size-small);
-  font-weight: var(--font-regular);
-  line-height: 1.6;
-}
-
-.rodape-secao {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.rodape-titulo {
-  margin-bottom: 8px;
-
-  color: var(--color-white);
-
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-bold);
-}
-
-.rodape-link,
-.rodape-texto {
-  color: var(--color-brand-gray);
-
-  font-size: var(--font-size-small);
-  font-weight: var(--font-regular);
-  line-height: 1.5;
-}
-
-.rodape-link {
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
-}
-
-.rodape-link:hover {
-  color: var(--color-white);
-  transform: translateX(4px);
-}
-
-.rodape-base {
-  padding: 18px 20px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-
-  text-align: center;
-}
-
-.rodape-base p {
-  color: var(--color-brand-gray);
-
-  font-size: var(--font-size-small);
-}
-
-
-/* =========================
-   ESTILOS GLOBAIS
-========================= */
 body {
+  min-width: 280px;
+  min-height: 100vh;
+  /* Reserva espaço para o cabeçalho fixo sem cobrir o conteúdo. */
+  padding-top: var(--global-header-height);
+  background: var(--color-white);
+  color: var(--global-texto);
   font-family: "Poppins", sans-serif;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-regular);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
+/* Mantém a textura original, mas com presença mais discreta. */
 main {
-  background-color: #ffffff;
-  background-image: url("../assets/img/textura_tatus.png");
+  min-height: 40vh;
+  background-color: var(--color-white);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.91), rgba(255, 255, 255, 0.91)),
+    url("../assets/img/textura_tatus.png");
+  background-position: center top, center top;
+  background-repeat: no-repeat, repeat;
+  background-size: cover, auto;
 }
 
 ul {
@@ -157,78 +109,162 @@ ul {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
 button {
-  border: none;
-  background: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
   cursor: pointer;
 }
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 img {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
+  font-weight: var(--font-bold);
 }
 
 h2 {
   color: var(--color-brand-blue);
 }
 
-.conteudo-secao {
-  max-width: var(--site-max-width);
-  margin: 0 auto;
-  padding: 0 20px;
+p {
+  overflow-wrap: break-word;
 }
 
+/* Navegação por teclado acessível. */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 3px solid var(--color-brand-blue);
+  outline-offset: 4px;
+}
+
+/* Classe de largura usada nas seções e no rodapé. */
+.conteudo-secao {
+  width: 100%;
+  max-width: var(--site-max-width);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 3.5vw, 40px);
+}
 
 /* =========================
-   CABEÇALHO
-========================= */
+   3. CABEÇALHO
+   ========================= */
 .cabecalho {
   position: fixed;
+  z-index: 1000;
+  inset: 0 0 auto;
   width: 100%;
-  z-index: 5;
-  background: var(--color-black);
+  background:
+    radial-gradient(circle at 80% -90%, rgba(74, 67, 152, 0.36), transparent 45%),
+    linear-gradient(112deg, var(--global-navbar) 0%, #131642 68%, #0c1030 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: var(--global-sombra-header);
 }
 
+/* Uma linha fina de destaque dá acabamento ao cabeçalho. */
+.cabecalho::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 5%,
+    rgba(255, 255, 255, 0.12) 30%,
+    rgba(163, 0, 0, 0.78) 75%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
 
 /* =========================
-   MENU DE NAVEGAÇÃO
-========================= */
+   4. MENU DE NAVEGAÇÃO
+   ========================= */
 .menu-navegacao {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  justify-content: space-between;
+  gap: 28px;
+  width: 100%;
+  max-width: var(--site-max-width);
+  min-height: var(--global-header-height);
+  margin-inline: auto;
+  padding: 10px clamp(20px, 3.5vw, 40px);
 }
 
+/* O arquivo original da logo é mantido, sem filtros nem recortes. */
 .logo-imagem {
+  display: block;
   width: 80px;
+  max-height: 70px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform var(--global-transicao);
 }
 
 .menu-lista {
   display: flex;
   align-items: center;
-  gap: 50px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: clamp(8px, 1.4vw, 18px);
+  min-width: 0;
 }
 
 .menu-link {
-  padding: 4px 15px;
-
-  color: var(--color-black);
-  background: var(--color-white);
-
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 9px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--border-radius-medium);
-
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--color-white);
   font-size: var(--font-size-small);
-  font-weight: var(--font-medium);
-
-  transition: box-shadow 0.5s ease;
+  font-weight: var(--font-semibold);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
+  transition:
+    transform var(--global-transicao),
+    background-color var(--global-transicao),
+    border-color var(--global-transicao),
+    box-shadow var(--global-transicao),
+    color var(--global-transicao);
 }
 
-.menu-link:hover {
-  box-shadow: 0 0 15px var(--color-white);
+/* Estado opcional: funciona caso o HTML já utilize .ativo ou aria-current. */
+.menu-link.ativo,
+.menu-link[aria-current="page"] {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-brand-blue);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
 }
 
 .menu-botao-abrir,
@@ -236,208 +272,458 @@ h2 {
   display: none;
 }
 
-
 /* =========================
-   FOOTER
-========================= */
-
+   5. RODAPÉ
+   ========================= */
 .rodape {
-  background: var(--color-black);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 8% 10%, rgba(67, 65, 148, 0.22), transparent 46%),
+    radial-gradient(ellipse at 92% 90%, rgba(163, 0, 0, 0.11), transparent 40%),
+    linear-gradient(135deg, var(--global-footer), #13172b);
   color: var(--color-white);
-
   font-family: "Poppins", sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Discreta barra de destaque no início do rodapé. */
+.rodape::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-blue),
+    #514fbb 55%,
+    var(--color-brand-red)
+  );
 }
 
 .rodape-conteudo {
   display: grid;
-  grid-template-columns: 1.4fr repeat(4, 1fr);
-  gap: 36px;
-
-  padding-top: 56px;
-  padding-bottom: 42px;
+  grid-template-columns: minmax(210px, 1.5fr) repeat(4, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 46px);
+  width: 100%;
+  max-width: var(--site-max-width);
+  margin-inline: auto;
+  padding: 72px clamp(20px, 3.5vw, 40px) 62px;
 }
 
 .rodape-logo-area {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 20px;
+  min-width: 0;
 }
 
+/* Logo intacta: só o tamanho é ajustado para o rodapé. */
 .rodape-logo {
-  width: 86px;
+  width: 92px;
+  height: auto;
+  object-fit: contain;
 }
 
 .rodape-descricao {
-  max-width: 260px;
-
-  color: var(--color-brand-gray);
-
+  max-width: 290px;
+  color: var(--global-footer-texto);
   font-size: var(--font-size-small);
   font-weight: var(--font-regular);
-  line-height: 1.6;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
 }
 
 .rodape-secao {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 13px;
+  min-width: 0;
 }
 
 .rodape-titulo {
-  margin-bottom: 8px;
-
+  position: relative;
+  margin: 0 0 12px;
+  padding-bottom: 14px;
   color: var(--color-white);
-
-  font-size: var(--font-size-normal);
+  font-size: 1rem;
   font-weight: var(--font-bold);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.rodape-titulo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  height: 3px;
+  border-radius: 99px;
+  background: #de6268;
 }
 
 .rodape-link,
 .rodape-texto {
-  color: var(--color-brand-gray);
-
+  max-width: 100%;
+  color: var(--global-footer-texto);
   font-size: var(--font-size-small);
   font-weight: var(--font-regular);
-  line-height: 1.5;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .rodape-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   transition:
-    color 0.3s ease,
-    transform 0.3s ease;
+    color var(--global-transicao),
+    transform var(--global-transicao);
 }
 
-.rodape-link:hover {
-  color: var(--color-white);
-  transform: translateX(4px);
+.rodape-link:focus-visible,
+.menu-link:focus-visible,
+.menu-botao-abrir:focus-visible,
+.menu-botao-fechar:focus-visible {
+  outline: 3px solid #91b9ff;
+  outline-offset: 4px;
 }
 
 .rodape-base {
-  padding: 18px 20px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-
+  position: relative;
+  padding: 22px clamp(20px, 3.5vw, 40px);
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
   text-align: center;
 }
 
 .rodape-base p {
-  color: var(--color-brand-gray);
-
-  font-size: var(--font-size-small);
+  margin: 0;
+  color: #adb8ca;
+  font-size: 0.84rem;
+  font-weight: var(--font-regular);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
 }
 
+/* =========================
+   6. EFEITOS DE MOUSE
+   ========================= */
+@media (hover: hover) and (pointer: fine) {
+  .logo-imagem:hover {
+    transform: scale(1.045);
+  }
+
+  .menu-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.19);
+    border-color: rgba(255, 255, 255, 0.36);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .menu-link.ativo:hover,
+  .menu-link[aria-current="page"]:hover {
+    background: var(--color-white);
+    color: var(--color-brand-blue);
+  }
+
+  .rodape-link:hover {
+    color: var(--color-white);
+    transform: translateX(4px);
+  }
+}
+
+/* =========================
+   7. TABLETS E TELAS MÉDIAS
+   ========================= */
+@media screen and (max-width: 1100px) {
+  .rodape-conteudo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 45px;
+    padding-block: 56px 48px;
+  }
+
+  .rodape-logo-area {
+    grid-column: 1 / -1;
+  }
+
+  .rodape-descricao {
+    max-width: 460px;
+  }
+}
+
+/* =========================
+   8. MENU MOBILE
+   A classe show-mobile-menu do JS original continua funcionando.
+   ========================= */
 @media screen and (max-width: 900px) {
   :root {
     --font-size-medium: 1rem;
     --font-size-large: 1.3rem;
     --font-size-xlarge: 1.5rem;
     --font-size-hero-title: 2.5rem;
+    --global-header-height: 76px;
   }
 
+  html {
+    scroll-padding-top: 90px;
+  }
 
-  /* =========================
-     MENU MOBILE
-  ========================= */
+  .menu-navegacao {
+    min-height: var(--global-header-height);
+    padding-block: 8px;
+  }
 
-  body.show-mobile-menu .cabecalho::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    backdrop-filter: blur(5px);
-    background: rgba(0, 0, 0, 0.5);
+  .logo-imagem {
+    width: 68px;
+    max-height: 60px;
   }
 
   .menu-botao-abrir,
   .menu-botao-fechar {
-    display: block;
-    font-size: var(--font-size-large);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 14px;
+    font-size: 1.45rem;
+    line-height: 1;
+    transition: background-color var(--global-transicao),
+                transform var(--global-transicao);
   }
 
   .menu-botao-abrir {
+    margin-left: auto;
     color: var(--color-white);
-    padding-right: 20px;
+    background: rgba(255, 255, 255, 0.11);
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   .menu-botao-fechar {
-    color: var(--color-black);
     position: absolute;
-    right: 30px;
-    top: 30px;
+    top: 23px;
+    right: 22px;
+    color: var(--color-brand-blue);
+    background: #f1f3fa;
+    border: 1px solid var(--global-borda);
   }
 
+  /* Fundo escurecido enquanto a navegação está aberta. */
+  .cabecalho::before {
+    content: "";
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    background: rgba(4, 8, 24, 0.59);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.32s ease, visibility 0.32s ease;
+  }
+
+  body.show-mobile-menu {
+    overflow: hidden;
+  }
+
+  body.show-mobile-menu .cabecalho::before {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Gaveta lateral à esquerda, independente da altura da página. */
   .menu-lista {
     position: fixed;
-    left: -300px;
+    z-index: 2;
     top: 0;
-
-    width: 300px;
-    height: 100vh;
-
+    left: 0;
+    display: flex;
     flex-direction: column;
-    align-items: center;
-
-    padding: 100px 20px 40px;
-
-    background: var(--color-white);
-
-    overflow-y: auto;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: min(340px, 87vw);
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    padding: 94px 24px 36px;
+    border-right: 1px solid var(--global-borda);
+    border-radius: 0 26px 26px 0;
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(13, 1, 102, 0.055), transparent 60%),
+      var(--color-white);
+    box-shadow: var(--global-sombra-menu);
     overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
-
-    transition: left 0.2s ease;
+    transform: translateX(-105%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.34s cubic-bezier(0.2, 0.75, 0.3, 1),
+                visibility 0.34s;
   }
 
   body.show-mobile-menu .menu-lista {
-    left: 0;
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .menu-lista > li {
+    width: 100%;
   }
 
   .menu-lista .menu-link {
-    display: block;
-    margin-top: 17px;
-    padding: 10px 20px;
-
-    color: var(--color-black);
-
-    font-size: var(--font-size-medium);
-    font-weight: var(--font-light);
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 50px;
+    margin: 0;
+    padding: 13px 16px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--global-texto);
+    font-size: 1rem;
+    font-weight: var(--font-medium);
+    text-align: left;
+    white-space: normal;
+    box-shadow: none;
   }
 
-  /* =========================
-     FOOTER
-  ========================= */
+  .menu-lista .menu-link.ativo,
+  .menu-lista .menu-link[aria-current="page"] {
+    background: #f0effa;
+    border-color: #e4e0fa;
+    color: var(--color-brand-blue);
+    font-weight: var(--font-semibold);
+  }
 
+  .menu-lista .menu-link:focus-visible {
+    outline-color: var(--color-brand-blue);
+  }
+}
+
+@media screen and (max-width: 900px) and (hover: hover) and (pointer: fine) {
+  .menu-lista .menu-link:hover {
+    transform: translateX(3px);
+    background: #f2f3fa;
+    border-color: #e9eaf5;
+    color: var(--color-brand-blue);
+    box-shadow: none;
+  }
+
+  .menu-botao-abrir:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .menu-botao-fechar:hover {
+    background: #e9eafb;
+  }
+}
+
+/* =========================
+   9. CELULARES
+   ========================= */
+@media screen and (max-width: 600px) {
   .rodape-conteudo {
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
-
-    padding-top: 42px;
-    padding-bottom: 36px;
+    gap: 34px 20px;
+    padding-block: 48px 42px;
   }
 
   .rodape-logo-area {
     grid-column: 1 / -1;
+  }
+
+  .rodape-titulo {
+    font-size: 0.95rem;
+  }
+
+  .rodape-link,
+  .rodape-texto,
+  .rodape-descricao {
+    font-size: 0.87rem;
   }
 }
 
 @media screen and (max-width: 480px) {
   .rodape-conteudo {
     grid-template-columns: 1fr;
+    gap: 34px;
     text-align: center;
   }
 
-  .rodape-logo-area {
-    align-items: center;
-  }
-
-  .rodape-descricao {
-    max-width: 100%;
-  }
-
+  .rodape-logo-area,
   .rodape-secao {
     align-items: center;
   }
 
-  .rodape-link:hover {
-    transform: none;
+  .rodape-descricao {
+    max-width: 340px;
+  }
+
+  .rodape-titulo {
+    margin-bottom: 4px;
+  }
+
+  .rodape-titulo::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .rodape-link,
+  .rodape-texto {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .rodape-base {
+    padding-block: 20px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .menu-lista {
+    width: min(310px, 90vw);
+    padding-inline: 18px;
+  }
+
+  .menu-botao-fechar {
+    right: 18px;
+  }
+
+  .conteudo-secao {
+    padding-inline: 16px;
+  }
+}
+
+/* =========================
+   10. ACESSIBILIDADE
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .logo-imagem,
+  .menu-link,
+  .menu-botao-abrir,
+  .menu-botao-fechar,
+  .menu-lista,
+  .cabecalho::before,
+  .rodape-link {
+    transition: none;
   }
 }
