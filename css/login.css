@@ -1,251 +1,332 @@
+/* ===================================================================
+   LOGIN E CADASTRO — DESIGN INTEGRADO AO CSS GLOBAL
+
+   Carregue este arquivo DEPOIS de global-refinado.css.
+   Mantém os IDs e as classes do CSS original, incluindo login Google,
+   mensagens, modal e a imagem. Não altera o HTML nem o JavaScript.
+   =================================================================== */
+
 /* =========================
-   LOGIN E CADASTRO
-========================= */
+   1. VARIÁVEIS DA PÁGINA
+   ========================= */
+:root {
+  --login-azul: var(--color-brand-blue, #0d0166);
+  --login-vermelho: var(--color-brand-red, #a30000);
+  --login-branco: var(--color-white, #ffffff);
+  --login-texto: var(--global-texto, #1d2738);
+  --login-texto-suave: var(--global-texto-suave, #68768a);
+  --login-borda: var(--global-borda, #e5eaf2);
+  --login-transicao: var(--global-transicao, 0.28s cubic-bezier(0.2, 0.75, 0.3, 1));
+  --login-sombra: 0 24px 70px rgba(9, 14, 39, 0.17);
+}
 
+/* =========================
+   2. ÁREA PRINCIPAL
+   O CSS global já reserva a altura do cabeçalho fixo no body.
+   ========================= */
 #main-login {
-  min-height: 100vh;
-  padding: 130px 40px 80px;
-
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
-}
-
-
-/* =========================
-   CONTAINER PRINCIPAL
-========================= */
-
-#container-login-cadastro {
-  width: 100%;
-  max-width: 920px;
-
-  display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 24px;
-
-  padding: 28px;
-
-  background: var(--color-brand-blue);
-
-  border-radius: 32px;
-
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.16);
-
+  gap: clamp(24px, 4vw, 64px);
+  min-height: calc(100vh - var(--global-header-height, 90px));
+  min-height: calc(100svh - var(--global-header-height, 90px));
+  padding: clamp(48px, 6vw, 92px) clamp(20px, 4vw, 54px);
+  overflow: hidden;
+  color: var(--login-texto);
   font-family: "Poppins", sans-serif;
 }
 
+/* Círculos suaves — deixam o fundo da página mais interessante
+   sem ocultar a textura já definida em global-refinado.css. */
+#main-login::before,
+#main-login::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+#main-login::before {
+  top: -240px;
+  right: -190px;
+  width: 580px;
+  aspect-ratio: 1;
+  border: 84px solid rgba(13, 1, 102, 0.045);
+}
+
+#main-login::after {
+  bottom: -230px;
+  left: -185px;
+  width: 440px;
+  aspect-ratio: 1;
+  border: 70px solid rgba(163, 0, 0, 0.035);
+}
 
 /* =========================
-   SEÇÕES
-========================= */
+   3. CONTAINER DO LOGIN E CADASTRO
+   ========================= */
+#container-login-cadastro {
+  position: relative;
+  isolation: isolate;
+  flex: 1 1 860px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  gap: clamp(12px, 1.8vw, 24px);
+  width: 100%;
+  max-width: 960px;
+  min-width: 0;
+  padding: clamp(14px, 1.75vw, 24px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 95% 6%, rgba(133, 124, 232, 0.21), transparent 38%),
+    linear-gradient(135deg, #0a0d35 0%, var(--login-azul) 55%, #1d1464 100%);
+  box-shadow: var(--login-sombra), 0 3px 12px rgba(13, 1, 102, 0.07);
+  font-family: "Poppins", sans-serif;
+}
 
+#container-login-cadastro::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -105px;
+  bottom: -175px;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 50%;
+  box-shadow: 0 0 0 48px rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+}
+
+/* =========================
+   4. PAINÉIS
+   ========================= */
 #secao-login,
 #secao-cadastro {
-  min-height: 480px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding: 42px 36px;
-
+  min-width: 0;
+  min-height: 490px;
+  padding: clamp(28px, 3.25vw, 50px) clamp(24px, 3vw, 44px);
   border-radius: 24px;
 }
 
 #secao-login {
-  background: var(--color-white);
-  color: var(--color-black);
+  background: var(--login-branco);
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  color: var(--login-texto);
+  box-shadow: 0 16px 42px rgba(3, 6, 36, 0.16);
 }
 
 #secao-cadastro {
   background: transparent;
-  color: var(--color-white);
+  color: var(--login-branco);
 }
 
-
 /* =========================
-   TIPOGRAFIA
-========================= */
-
+   5. TÍTULOS E DESCRIÇÕES
+   ========================= */
 #secao-login h1,
 #secao-cadastro h2 {
-  margin-bottom: 10px;
-
-  font-size: 2rem;
-  font-weight: var(--font-extrabold);
+  margin: 0 0 14px;
+  font-size: clamp(1.85rem, 2.6vw, 2.4rem);
+  font-weight: var(--font-extrabold, 900);
   line-height: 1.2;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 #secao-login h1 {
-  color: var(--color-brand-blue);
+  color: var(--login-azul);
 }
 
 #secao-cadastro h2 {
-  color: var(--color-white);
+  color: var(--login-branco);
 }
 
 #secao-login p,
 #secao-cadastro p {
-  margin-bottom: 32px;
-
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-regular);
-  line-height: 1.6;
+  margin: 0 0 28px;
+  font-size: clamp(0.94rem, 1vw, 1.02rem);
+  font-weight: var(--font-regular, 400);
+  line-height: 1.78;
+  text-wrap: pretty;
 }
 
 #secao-login p {
-  color: var(--color-black);
+  color: var(--login-texto-suave);
 }
 
 #secao-cadastro p {
-  color: var(--color-white);
+  color: #d9d7f1;
 }
 
-
 /* =========================
-   FORMULÁRIOS
-========================= */
-
+   6. FORMULÁRIOS E RÓTULOS
+   ========================= */
 #form-login,
 #form-cadastro {
-  height: 100%;
-
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  min-width: 0;
 }
 
 #form-login label,
 #form-cadastro label {
-  margin-bottom: -6px;
-
-  font-size: var(--font-size-small);
-  font-weight: var(--font-semibold);
+  display: block;
+  margin-bottom: -5px;
+  font-size: 0.89rem;
+  font-weight: var(--font-semibold, 600);
+  letter-spacing: 0.005em;
 }
 
 #form-login label {
-  color: var(--color-brand-blue);
+  color: var(--login-azul);
 }
 
 #form-cadastro label {
-  color: var(--color-white);
+  color: #f5f5ff;
 }
 
+/* =========================
+   7. CAMPOS DE DIGITAÇÃO
+   ========================= */
 #container-login-cadastro input {
+  display: block;
   width: 100%;
-
-  padding: 13px 16px;
-
+  min-width: 0;
+  min-height: 52px;
+  padding: 13px 17px;
+  border: 1.5px solid transparent;
   border-radius: 14px;
-
-  font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-normal);
-
   outline: none;
-
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.2s ease;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.97rem;
+  font-weight: var(--font-regular, 400);
+  line-height: 1.45;
+  transition: background-color var(--login-transicao),
+    border-color var(--login-transicao),
+    box-shadow var(--login-transicao);
 }
 
 #secao-login input {
-  border: 2px solid var(--color-brand-gray);
-
-  background: var(--color-white);
-  color: var(--color-black);
-}
-
-#secao-cadastro input {
-  border: 2px solid var(--color-white);
-
-  background: transparent;
-  color: var(--color-white);
-}
-
-#secao-cadastro input::placeholder {
-  color: var(--color-brand-gray);
+  border-color: #dce1ec;
+  background: #f8f9fc;
+  color: var(--login-texto);
 }
 
 #secao-login input::placeholder {
-  color: var(--color-brand-gray);
+  color: #8792a4;
+  opacity: 1;
 }
 
-#container-login-cadastro input:hover {
-  transform: scale(1.01);
+#secao-cadastro input {
+  border-color: rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--login-branco);
 }
 
-#secao-login input:hover,
-#secao-login input:focus {
-  border-color: var(--color-brand-blue);
-
-  box-shadow:
-    0 0 0 4px rgba(13, 1, 102, 0.12);
+#secao-cadastro input::placeholder {
+  color: #cac8e6;
+  opacity: 1;
 }
 
-#secao-cadastro input:hover,
-#secao-cadastro input:focus {
-  border-color: var(--color-white);
-
-  box-shadow:
-    0 0 0 4px rgba(255, 255, 255, 0.18);
+#secao-login input:hover {
+  border-color: #b6b4d4;
+  background: var(--login-branco);
 }
 
+#secao-cadastro input:hover {
+  border-color: rgba(255, 255, 255, 0.62);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+#secao-login input:focus,
+#secao-login input:focus-visible {
+  border-color: var(--login-azul);
+  background: var(--login-branco);
+  box-shadow: 0 0 0 4px rgba(13, 1, 102, 0.10);
+}
+
+#secao-cadastro input:focus,
+#secao-cadastro input:focus-visible {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.17);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.16);
+}
+
+#container-login-cadastro input:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
 
 /* =========================
-   MENSAGENS
-========================= */
-
+   8. MENSAGENS DE RETORNO
+   ========================= */
 #mensagem-login,
 #mensagem-cadastro {
   min-height: 22px;
-
-  font-size: var(--font-size-small);
-  font-weight: var(--font-medium);
-  line-height: 1.4;
-}
-
-#mensagem-login {
+  font-size: 0.87rem;
+  font-weight: var(--font-medium, 500);
+  line-height: 1.5;
   text-align: left;
-}
-
-#mensagem-cadastro {
-  text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .mensagem-erro {
-  color: var(--color-brand-red);
+  color: var(--login-vermelho);
 }
 
 .mensagem-sucesso {
-  color: var(--color-natureza);
+  color: var(--color-natureza, #2e7d32);
 }
 
+/* Contraste melhor para feedback exibido sobre o painel azul-escuro. */
+#secao-cadastro .mensagem-erro,
+#mensagem-cadastro.mensagem-erro {
+  color: #ffc9cc;
+}
+
+#secao-cadastro .mensagem-sucesso,
+#mensagem-cadastro.mensagem-sucesso {
+  color: #b5f5d2;
+}
 
 /* =========================
-   BOTÕES
-========================= */
-
+   9. BOTÕES PRINCIPAIS
+   ========================= */
 #container-login-cadastro button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
   margin-top: 12px;
-  padding: 14px 24px;
-
-  border-radius: var(--border-radius-medium);
-
-  font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-bold);
-
+  padding: 13px 24px;
+  border: 1.5px solid transparent;
+  border-radius: 14px;
   cursor: pointer;
-
-  transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.97rem;
+  font-weight: var(--font-bold, 700);
+  line-height: 1.45;
+  text-align: center;
+  transition: background-color var(--login-transicao),
+    border-color var(--login-transicao),
+    color var(--login-transicao),
+    box-shadow var(--login-transicao),
+    transform var(--login-transicao);
+  -webkit-tap-highlight-color: transparent;
 }
 
 #form-login button,
@@ -254,238 +335,355 @@
 }
 
 #secao-login button {
-  border: 2px solid var(--color-brand-blue);
-
-  background: var(--color-brand-blue);
-  color: var(--color-white);
-
-  box-shadow:
-    0 8px 20px rgba(13, 1, 102, 0.25);
-}
-
-#secao-login button:hover {
-  background: var(--color-brand-red);
-  border-color: var(--color-brand-red);
-
-  transform: scale(1.04);
-
-  box-shadow:
-    0 10px 24px rgba(163, 0, 0, 0.28);
+  background: var(--login-azul);
+  border-color: var(--login-azul);
+  color: var(--login-branco);
+  box-shadow: 0 8px 18px rgba(13, 1, 102, 0.17);
 }
 
 #secao-cadastro button {
-  border: 2px solid var(--color-white);
-
-  background: var(--color-white);
-  color: var(--color-brand-blue);
-
-  box-shadow:
-    0 8px 20px rgba(255, 255, 255, 0.16);
-}
-
-#secao-cadastro button:hover {
-  background: var(--color-brand-red);
-  border-color: var(--color-brand-red);
-  color: var(--color-white);
-
-  transform: scale(1.04);
-
-  box-shadow:
-    0 10px 24px rgba(163, 0, 0, 0.35);
+  background: var(--login-branco);
+  border-color: var(--login-branco);
+  color: var(--login-azul);
+  box-shadow: 0 8px 20px rgba(3, 6, 36, 0.10);
 }
 
 #container-login-cadastro button:active {
-  transform: scale(0.98);
+  transform: translateY(1px) scale(0.99);
 }
 
-.google-login-btn {
-  width: 280px;
+#container-login-cadastro button:focus-visible {
+  outline: 3px solid #9dbeff;
+  outline-offset: 4px;
+}
 
-  margin: 12px auto;
+#container-login-cadastro button:disabled {
+  opacity: 0.62;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
-  display: flex;
+/* =========================
+   10. LOGIN COM GOOGLE
+   Estilo específico para não herdar a cor dos botões principais.
+   ========================= */
+#container-login-cadastro .google-login-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-
-  background-color: #ffffff !important;
-  color: #3c4043 !important;
-
-  border: 1px solid #dadce0 !important;
-  border-radius: 21px;
-
-  height: 42px;
+  gap: 12px;
+  width: min(100%, 330px);
+  min-height: 48px;
+  height: auto;
+  margin: 14px auto 0;
+  padding: 11px 18px;
+  border: 1px solid #dadce0;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #3c4043;
+  box-shadow: 0 3px 12px rgba(60, 64, 67, 0.07);
+  font-size: 0.91rem;
+  font-weight: var(--font-semibold, 600);
 }
 
-.google-login-btn:hover {
-  background-color: #f8f9fa !important;
-}
-
-.google-login-btn:hover {
-  background: #f8f9fa;
-
-  box-shadow:
-    0 1px 2px rgba(60, 64, 67, 0.15);
-}
-
+#container-login-cadastro .google-login-btn img,
 .google-login-btn img {
-  width: 18px;
-  height: 18px;
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
 }
 
+/* =========================
+   11. MODAL DO GOOGLE
+   Mantém o funcionamento de exibir/ocultar feito pelo JavaScript.
+   ========================= */
 .modal-google {
   position: fixed;
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.5);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   z-index: 9999;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(5, 8, 26, 0.67);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* O atributo hidden também funciona, mesmo com display: flex acima. */
+.modal-google[hidden] {
+  display: none !important;
 }
 
 .modal-google-conteudo {
-  width: 90%;
-  max-width: 300px;
-
-  padding: 28px;
-
-  background: white;
-
-  border-radius: 18px;
-
-  text-align: center;
-
+  width: 100%;
+  max-width: 360px;
+  margin-block: auto;
+  padding: clamp(28px, 5vw, 38px);
+  border: 1px solid var(--login-borda);
+  border-radius: 22px;
+  background: var(--login-branco);
+  box-shadow: 0 26px 75px rgba(3, 6, 36, 0.26);
+  color: var(--login-texto);
   font-family: "Poppins", sans-serif;
+  text-align: center;
 }
 
-
 .modal-google-conteudo h3 {
-  margin-bottom: 12px;
-
-  color: var(--color-brand-blue);
+  margin: 0 0 12px;
+  color: var(--login-azul);
+  font-size: 1.32rem;
+  font-weight: var(--font-bold, 700);
+  line-height: 1.3;
 }
 
 .modal-google-conteudo p {
-  margin-bottom: 20px;
-
-  color: #666;
+  margin: 0 0 24px;
+  color: var(--login-texto-suave);
+  font-size: 0.94rem;
+  line-height: 1.7;
 }
 
 .modal-google-conteudo button {
-  border: none;
-
-  padding: 10px 20px;
-
-  border-radius: 10px;
-
-  background: var(--color-brand-blue);
-
-  color: white;
-
+  min-height: 46px;
+  padding: 11px 24px;
+  border: 1px solid var(--login-azul);
+  border-radius: 12px;
+  background: var(--login-azul);
+  color: var(--login-branco);
+  font-family: inherit;
+  font-size: 0.94rem;
+  font-weight: var(--font-semibold, 600);
   cursor: pointer;
+  transition: background-color var(--login-transicao),
+    border-color var(--login-transicao),
+    transform var(--login-transicao);
 }
 
+.modal-google-conteudo button:focus-visible {
+  outline: 3px solid #9dbeff;
+  outline-offset: 4px;
+}
 
 /* =========================
-   IMAGEM
-========================= */
-
+   12. IMAGEM DA PÁGINA
+   ========================= */
 #imagem-login-cadastro {
-  width: 100%;
-  max-width: 360px;
-  max-height: 78vh;
-
+  display: block;
+  flex: 0 1 340px;
+  width: min(30vw, 340px);
+  max-width: 100%;
+  max-height: min(70svh, 580px);
+  height: auto;
   object-fit: contain;
-
-  filter:
-    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 20px 25px rgba(9, 14, 39, 0.16));
+  animation: loginImagemFlutua 6s ease-in-out infinite;
 }
 
+@keyframes loginImagemFlutua {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
 /* =========================
-   RESPONSIVIDADE
-========================= */
-
-@media screen and (max-width: 1100px) {
-  #main-login {
-    gap: 32px;
+   13. HOVER PARA MOUSE
+   ========================= */
+@media (hover: hover) and (pointer: fine) {
+  #secao-login button:not(:disabled):hover {
+    background: var(--login-vermelho);
+    border-color: var(--login-vermelho);
+    box-shadow: 0 12px 24px rgba(163, 0, 0, 0.18);
+    transform: translateY(-2px);
   }
 
-  #imagem-login-cadastro {
-    max-width: 300px;
+  #secao-cadastro button:not(:disabled):hover {
+    background: #eeeaff;
+    border-color: #eeeaff;
+    box-shadow: 0 12px 24px rgba(3, 6, 36, 0.20);
+    transform: translateY(-2px);
+  }
+
+  #container-login-cadastro #secao-login .google-login-btn:not(:disabled):hover,
+  #container-login-cadastro #secao-cadastro .google-login-btn:not(:disabled):hover {
+    background: #f8f9fa;
+    border-color: #c6cad1;
+    color: #3c4043;
+    box-shadow: 0 7px 17px rgba(60, 64, 67, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .modal-google-conteudo button:hover {
+    background: var(--login-vermelho);
+    border-color: var(--login-vermelho);
+    transform: translateY(-2px);
   }
 }
 
-@media screen and (max-width: 900px) {
+/* =========================
+   14. TELAS MÉDIAS
+   ========================= */
+@media screen and (max-width: 1200px) {
   #main-login {
-    padding: 120px 20px 70px;
-
-    flex-direction: column;
-    gap: 32px;
+    gap: 28px;
+    padding-inline: 24px;
   }
 
   #container-login-cadastro {
-    max-width: 620px;
+    max-width: 890px;
+  }
 
+  #imagem-login-cadastro {
+    flex-basis: 260px;
+    width: min(25vw, 260px);
+  }
+}
+
+/* =========================
+   15. TABLETS
+   ========================= */
+@media screen and (max-width: 1000px) {
+  #main-login {
+    flex-direction: column;
+    min-height: auto;
+    gap: 30px;
+    padding-block: 62px 78px;
+  }
+
+  #container-login-cadastro {
+    flex: 0 1 auto;
+    width: min(100%, 680px);
     grid-template-columns: 1fr;
-
-    padding: 24px;
-    border-radius: 26px;
+    gap: 16px;
+    padding: 18px;
+    border-radius: 28px;
   }
 
   #secao-login,
   #secao-cadastro {
     min-height: auto;
-
-    padding: 34px 28px;
-    border-radius: 22px;
+    padding: 34px 36px;
+    border-radius: 20px;
   }
 
   #secao-login h1,
   #secao-cadastro h2 {
-    font-size: 1.8rem;
-  }
-
-  #secao-login p,
-  #secao-cadastro p {
-    margin-bottom: 26px;
+    font-size: clamp(1.8rem, 4vw, 2.15rem);
   }
 
   #imagem-login-cadastro {
-    max-width: 260px;
-    max-height: none;
+    flex: initial;
+    width: min(55%, 270px);
+    max-height: 280px;
   }
 }
 
-@media screen and (max-width: 480px) {
+/* =========================
+   16. CELULARES
+   ========================= */
+@media screen and (max-width: 600px) {
   #main-login {
-    padding: 110px 14px 50px;
+    padding: 36px 14px 54px;
+    gap: 24px;
+  }
+
+  #main-login::before {
+    width: 340px;
+    top: -160px;
+    right: -160px;
+    border-width: 52px;
   }
 
   #container-login-cadastro {
-    padding: 18px;
-    border-radius: 22px;
+    width: 100%;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 23px;
   }
 
   #secao-login,
   #secao-cadastro {
-    padding: 28px 20px;
+    padding: 30px 23px;
+    border-radius: 17px;
   }
 
   #secao-login h1,
   #secao-cadastro h2 {
-    font-size: 1.55rem;
+    margin-bottom: 12px;
+    font-size: clamp(1.7rem, 6vw, 1.98rem);
   }
 
-  #container-login-cadastro input,
+  #secao-login p,
+  #secao-cadastro p {
+    margin-bottom: 22px;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  #container-login-cadastro input {
+    min-height: 50px;
+    font-size: 1rem;
+    /* evita zoom automático no iOS */
+  }
+
   #container-login-cadastro button {
+    min-height: 50px;
     font-size: 0.95rem;
   }
 
   #imagem-login-cadastro {
-    max-width: 220px;
+    width: min(60%, 230px);
+    max-height: 240px;
+  }
+}
+
+/* =========================
+   17. CELULARES PEQUENOS
+   ========================= */
+@media screen and (max-width: 380px) {
+  #main-login {
+    padding-inline: 10px;
+  }
+
+  #container-login-cadastro {
+    padding: 9px;
+  }
+
+  #secao-login,
+  #secao-cadastro {
+    padding: 27px 18px;
+  }
+
+  #secao-login h1,
+  #secao-cadastro h2 {
+    font-size: 1.6rem;
+  }
+
+  #container-login-cadastro .google-login-btn {
+    width: 100%;
+  }
+}
+
+/* =========================
+   18. ACESSIBILIDADE
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  #imagem-login-cadastro {
+    animation: none;
+  }
+
+  #container-login-cadastro input,
+  #container-login-cadastro button,
+  .modal-google-conteudo button {
+    transition: none;
   }
 }
