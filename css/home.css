@@ -1,339 +1,525 @@
+/* ============================================================
+   HOME — VERSÃO INTEGRADA AO CSS GLOBAL
+
+   Carregue este arquivo DEPOIS de global-refinado.css.
+   O reset, as fontes, a textura do site, o cabeçalho e o rodapé
+   já são definidos pelo CSS global e não são repetidos aqui.
+
+   Classes originais preservadas: hero, filtros, locais,
+   carrossel, indicadores e área administrativa.
+   ============================================================ */
+
 /* =========================
-   HERO
-========================= */
+   1. VARIÁVEIS DA HOME
+   ========================= */
+:root {
+  --home-azul: var(--color-brand-blue, #0d0166);
+  --home-vermelho: var(--color-brand-red, #a30000);
+  --home-branco: var(--color-white, #ffffff);
+  --home-texto: var(--global-texto, #1d2738);
+  --home-texto-suave: var(--global-texto-suave, #68768a);
+  --home-fundo: var(--global-fundo, #f7f9fd);
+  --home-borda: var(--global-borda, #e5eaf2);
+  --home-azul-suave: #f1f0fc;
+  --home-sombra: 0 12px 36px rgba(9, 14, 39, 0.07);
+  --home-sombra-hover: 0 22px 48px rgba(9, 14, 39, 0.13);
+  --home-raio: 24px;
+  --home-largura: 1180px;
+  --home-transicao: var(--global-transicao, 0.28s cubic-bezier(0.2, 0.75, 0.3, 1));
+}
+
+/* =========================
+   2. CONTROLES E ACESSIBILIDADE
+   ========================= */
+.botao-catalogo,
+.filtro-btn,
+.carrossel-botao,
+.indicador,
+.admin-home-btn {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.botao-catalogo,
+.filtro-btn,
+.admin-home-btn {
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.botao-catalogo:focus-visible,
+.filtro-btn:focus-visible,
+.carrossel-botao:focus-visible,
+.indicador:focus-visible,
+.admin-home-btn:focus-visible {
+  outline: 3px solid var(--home-azul);
+  outline-offset: 4px;
+}
+
+/* =========================
+   3. HERO — APRESENTAÇÃO
+   ========================= */
 .secao-hero {
-  min-height: 100vh;
-  background: transparent;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 92% 17%, rgba(44, 37, 146, 0.105), transparent 42%),
+    radial-gradient(ellipse at 1% 85%, rgba(163, 0, 0, 0.055), transparent 40%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.97), rgba(246, 247, 255, 0.91));
+}
+
+/* Elementos decorativos discretos, independentes do HTML. */
+.secao-hero::before,
+.secao-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.secao-hero::before {
+  top: -230px;
+  right: -180px;
+  width: 560px;
+  height: 560px;
+  border: 88px solid rgba(13, 1, 102, 0.035);
+}
+
+.secao-hero::after {
+  bottom: -220px;
+  left: -160px;
+  width: 470px;
+  height: 470px;
+  border: 75px solid rgba(163, 0, 0, 0.028);
 }
 
 .hero-conteudo {
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  color: var(--color-white);
+  justify-content: space-between;
+  gap: clamp(38px, 5vw, 85px);
+  width: min(calc(100% - 48px), var(--home-largura));
+  min-height: min(740px, 85svh);
+  margin-inline: auto;
+  padding-block: clamp(68px, 8vw, 112px);
 }
 
 .hero-texto {
-  flex: 1;
+  flex: 1 1 55%;
+  min-width: 0;
 }
 
 .hero-titulo {
-  font-family: "Poppins";
-  font-size: var(--font-size-hero-title);
-  font-weight: var(--font-extrabold);
-  color: var(--color-brand-blue);
+  max-width: 15ch;
+  margin: 0;
+  color: var(--home-azul);
+  font-size: clamp(2.45rem, 5vw, 4.85rem);
+  font-weight: var(--font-extrabold, 900);
+  line-height: 1.11;
+  letter-spacing: -0.048em;
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 .hero-descricao {
-  max-width: 540px;
-  margin: 20px 0 40px;
-  color: var(--color-black);
-  font-size: var(--font-size-medium);
-  font-weight: var(--font-regular);
-  line-height: 1.7;
+  max-width: 550px;
+  margin: 28px 0 36px;
+  color: var(--home-texto-suave);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  font-weight: var(--font-regular, 400);
+  line-height: 1.84;
+  text-wrap: pretty;
 }
 
 .hero-acoes {
   display: flex;
-  gap: 23px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
 .botao-catalogo {
-  padding: 10px 26px;
-  border: 2px solid transparent;
-  color: var(--color-white);
-  background: var(--color-brand-red);
-  border-radius: var(--border-radius-medium);
-  font-weight: var(--font-medium);
-  transition: 0.5s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  max-width: 100%;
+  padding: 14px 30px;
+  border: 1px solid var(--home-vermelho);
+  border-radius: 15px;
+  background: var(--home-vermelho);
+  color: var(--home-branco);
+  box-shadow: 0 11px 27px rgba(163, 0, 0, 0.19);
+  font-size: 0.98rem;
+  font-weight: var(--font-bold, 700);
+  line-height: 1.4;
+  text-align: center;
+  transition:
+    transform var(--home-transicao),
+    box-shadow var(--home-transicao),
+    background-color var(--home-transicao),
+    border-color var(--home-transicao);
 }
 
-.botao-catalogo:hover {
-  color: var(--color-brand-red);
-  border-color: var(--color-brand-red);
-  background: transparent;
+.botao-catalogo:active {
+  transform: translateY(1px) scale(0.99);
 }
 
 .hero-imagem-container {
-  max-width: 500px;
-  margin-right: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 43%;
+  width: 43%;
+  max-width: 510px;
+  min-width: 0;
+  margin: 0;
+}
+
+/* Halo delicado atrás da imagem, sem alterar a própria imagem. */
+.hero-imagem-container::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 8% 1% 10%;
+  border-radius: 46% 54% 56% 44% / 46% 43% 57% 54%;
+  background: linear-gradient(140deg, rgba(13, 1, 102, 0.075), rgba(163, 0, 0, 0.022));
+  transform: rotate(-8deg);
+}
+
+.hero-imagem-container img {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  height: auto;
+  object-fit: contain;
+  /* Sem filtros ou recortes na imagem/logo do projeto. */
+  filter: none;
 }
 
 /* =========================
-   FILTROS
-========================= */
-
+   4. CATEGORIAS — FILTROS
+   ========================= */
 .secao-filtros {
-  padding: 60px 0;
-  background-color: var(--color-brand-gray);
+  position: relative;
+  padding: clamp(54px, 6vw, 82px) 24px;
+  border-block: 1px solid var(--home-borda);
+  background: var(--home-fundo);
 }
 
 .filtros-container {
-  display: flex;
-  justify-content: center;
-  gap: 150px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
+  width: 100%;
+  max-width: var(--home-largura);
+  margin-inline: auto;
 }
 
 .filtro-btn {
-  width: 180px;
-  height: 180px;
-
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-
-
-  background: var(--color-white);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-
-  font-family:"poppins" ;
-  font-size: var(--font-size-medium);
-  font-weight: var(--font-bold);
-
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  min-height: 166px;
+  padding: 26px 18px;
+  overflow: hidden;
+  border: 1px solid var(--home-borda);
+  border-radius: 8px;
+  background: var(--home-branco);
+  color: var(--home-texto);
+  box-shadow: 0 7px 22px rgba(9, 14, 39, 0.045);
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+  font-weight: var(--font-bold, 700);
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background-color 0.3s ease;
+    transform var(--home-transicao),
+    box-shadow var(--home-transicao),
+    background-color var(--home-transicao),
+    border-color var(--home-transicao),
+    color var(--home-transicao);
 }
 
+/* Faixa superior na cor da categoria. */
+.filtro-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 4px;
+  border-radius: 0 0 8px 8px;
+  background: var(--filtro-cor, var(--home-azul));
+  transition:
+    left var(--home-transicao),
+    right var(--home-transicao),
+    background-color var(--home-transicao);
+}
+
+.filtro-btn :is(svg, i) {
+  flex-shrink: 0;
+  font-size: clamp(1.9rem, 3vw, 2.45rem);
+  transition: transform var(--home-transicao);
+}
+
+.filtro-btn img {
+  width: auto;
+  max-width: 58px;
+  max-height: 58px;
+  object-fit: contain;
+}
+
+/* Aproveita as variáveis de categoria do CSS global. */
 .filtro-natureza {
-  color: var(--color-black);
-  border-color: var(--color-black);
-}
-
-.filtro-natureza:hover {
-  transform: scale(1.05);
-  
-}
-
-.filtro-natureza.ativo {
-  background: var(--color-natureza);
-  color: var(--color-white);
-  border-color: var(--color-natureza);
-  box-shadow: 0 0 25px rgba(46, 125, 50, 0.6);
+  --filtro-cor: var(--color-natureza, #2e7d32);
 }
 
 .filtro-restaurantes {
-  color: var(--color-black);
-  border-color: var(--color-black);
-}
-
-.filtro-restaurantes:hover {
-  transform: scale(1.05);
-}
-
-.filtro-restaurantes.ativo {
-  background: var(--color-restaurantes);
-  color: var(--color-white);
-  border-color: var(--color-restaurantes);
-  box-shadow: 0 0 25px rgba(198, 40, 40, 0.6);
+  --filtro-cor: var(--color-restaurantes, #c62828);
 }
 
 .filtro-bares {
-  color: var(--color-black);
-  border-color: var(--color-black);
-}
-
-.filtro-bares:hover {
-  transform: scale(1.05);
-}
-
-.filtro-bares.ativo {
-  background: var(--color-bares);
-  color: var(--color-white);
-  border-color: var(--color-bares);
-  box-shadow: 0 0 25px rgba(249, 168, 37, 0.6);
+  --filtro-cor: var(--color-bares, #f9a825);
 }
 
 .filtro-eventos {
-  color: var(--color-black);
-  border-color: var(--color-black);
+  --filtro-cor: var(--color-eventos, #1565c0);
 }
 
-.filtro-eventos:hover {
-  transform: scale(1.05);
+/* Mantém o estado .ativo utilizado pelo JavaScript. */
+.filtro-btn.ativo {
+  border-color: var(--filtro-cor, var(--home-azul));
+  background: var(--filtro-cor, var(--home-azul));
+  color: var(--home-branco);
+  box-shadow: 0 13px 28px rgba(9, 14, 39, 0.14);
 }
 
-.filtro-eventos.ativo {
-  background: var(--color-eventos);
-  color: var(--color-white);
-  border-color: var(--color-eventos);
-  box-shadow: 0 0 25px rgba(21, 101, 192, 0.6);
+/* Amarelo exige texto escuro para preservar a legibilidade. */
+.filtro-btn.filtro-bares.ativo {
+  color: #231a05;
+}
+
+.filtro-btn.ativo::before {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.filtro-btn.filtro-bares.ativo::before {
+  background: rgba(35, 26, 5, 0.35);
 }
 
 /* =========================
-   LOCAIS
-========================= */
-
+   5. LOCAIS — LISTAGEM
+   ========================= */
 .secao-locais {
-  margin-top: 80px;
-  padding: 0 0 80px;
+  margin-top: 0;
+  padding: clamp(64px, 7vw, 100px) 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), #fbfbff);
 }
 
 .locais-container {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: clamp(28px, 4vw, 46px);
+  width: 100%;
+  max-width: 1030px;
+  margin-inline: auto;
 }
 
 .local-card {
+  position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 28px;
+  min-width: 0;
+  padding: clamp(24px, 4vw, 42px);
+  overflow: hidden;
+  border: 1px solid var(--home-borda);
+  border-radius: var(--home-raio);
+  background: var(--home-branco);
+  box-shadow: var(--home-sombra);
+  transition:
+    transform var(--home-transicao),
+    box-shadow var(--home-transicao),
+    border-color var(--home-transicao);
+}
 
-  background: var(--color-white);
-  border-radius: 20px;
-
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-
-  font-family: "Poppins", sans-serif;
+.local-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 42px;
+  width: 75px;
+  height: 4px;
+  border-radius: 0 0 8px 8px;
+  background: var(--home-vermelho);
 }
 
 .local-nome {
-  margin-bottom: 16px;
-
-  color: var(--color-brand-blue);
-
-  font-size: 1.8rem;
-  font-weight: var(--font-bold);
+  margin: 0 0 24px;
+  color: var(--home-azul);
+  font-size: clamp(1.45rem, 2.55vw, 2rem);
+  font-weight: var(--font-bold, 700);
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
 }
 
-
 /* =========================
-   CARROSSEL
-========================= */
-
+   6. CARROSSEL DE IMAGENS
+   ========================= */
 .carrossel-area {
   display: flex;
   align-items: center;
-  gap: 14px;
-
-  margin-bottom: 12px;
+  gap: clamp(8px, 1.5vw, 16px);
+  min-width: 0;
+  margin-bottom: 10px;
 }
 
 .local-carrossel {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .carrossel-imagem-container {
+  position: relative;
   width: 100%;
-  height: 320px;
-
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-
-  border-radius: var(--border-radius-small);
-  background: var(--color-brand-gray);
+  border-radius: 18px;
+  background: linear-gradient(130deg, #ebeaf6, #f5f7fc);
 }
 
 .carrossel-imagem {
+  display: block;
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
+  object-position: center;
   transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+    opacity 0.32s ease,
+    transform 0.4s ease;
 }
 
 .carrossel-imagem.trocando {
-  opacity: 0;
-  transform: translateX(20px);
+  opacity: 0.12;
+  transform: scale(1.025);
 }
 
-
-/* =========================
-   BOTÕES
-========================= */
-
+/* Controles externos à imagem, evitando cobrir o conteúdo. */
 .carrossel-botao {
-  width: 42px;
-  height: 42px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
-
-  border-radius: var(--border-radius-circle);
-
-  background: rgba(0, 0, 0, 0.45);
-  color: var(--color-white);
-
+  justify-content: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--home-borda);
+  border-radius: 50%;
+  background: var(--home-branco);
+  color: var(--home-azul);
+  box-shadow: 0 5px 15px rgba(9, 14, 39, 0.09);
   font-size: 1.3rem;
-
+  font-weight: var(--font-bold, 700);
+  line-height: 1;
   transition:
-    transform 0.3s ease,
-    background 0.3s ease;
+    transform var(--home-transicao),
+    color var(--home-transicao),
+    background-color var(--home-transicao),
+    box-shadow var(--home-transicao);
 }
 
-.carrossel-botao:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: scale(1.08);
+.carrossel-botao:active {
+  transform: scale(0.94);
 }
 
+.carrossel-botao:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  box-shadow: none;
+}
 
 /* =========================
-   INDICADORES
-========================= */
-
+   7. INDICADORES DO CARROSSEL
+   ========================= */
 .carrossel-indicadores {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
-
-  margin: 14px 0 18px;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 12px 0 24px;
 }
 
 .indicador {
-  width: 9px;
-  height: 9px;
-
-  border-radius: var(--border-radius-circle);
-
-  background: var(--color-brand-gray);
-
-  transition: background-color 0.35s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
 }
 
-.indicador.ativo {
-  background: #555555;
+.indicador::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  background: #c3c8d7;
+  transition:
+    width var(--home-transicao),
+    background-color var(--home-transicao);
 }
 
+.indicador.ativo::before {
+  width: 24px;
+  background: var(--home-azul);
+}
 
 /* =========================
-   TEXTOS
-========================= */
-
+   8. DESCRIÇÃO E HORÁRIOS
+   ========================= */
 .local-descricao {
-  margin-bottom: 12px;
-
-  color: var(--color-black);
-
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-regular);
-
-  line-height: 1.6;
+  margin: 0 0 22px;
+  color: var(--home-texto);
+  font-size: clamp(0.97rem, 1.2vw, 1.05rem);
+  font-weight: var(--font-regular, 400);
+  line-height: 1.9;
+  overflow-wrap: anywhere;
 }
 
 .local-horario {
-  color: #666666;
-
-  font-size: var(--font-size-small);
-  font-weight: var(--font-light);
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--home-borda);
+  color: var(--home-texto-suave);
+  font-size: 0.92rem;
+  font-weight: var(--font-medium, 500);
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 /* =========================
-   admin
-========================= */
-
+   9. ÁREA ADMINISTRATIVA
+   ========================= */
 .secao-admin-home {
   display: none;
-  padding: 40px 0;
+  padding: 54px 24px 80px;
+  border-top: 1px solid var(--home-borda);
+  background: var(--home-fundo);
 }
 
 .secao-admin-home.visivel {
@@ -342,124 +528,325 @@
 
 .admin-home-botoes {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
+  width: 100%;
+  max-width: var(--home-largura);
+  margin-inline: auto;
 }
 
 .admin-home-btn {
-  min-height: 110px;
-
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  padding: 20px;
-
-  background: var(--color-brand-blue);
-  color: var(--color-white);
-
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+  min-height: 124px;
+  padding: 24px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-
-  font-weight: var(--font-bold);
+  background: linear-gradient(130deg, var(--home-azul), #21137c);
+  color: var(--home-branco);
+  box-shadow: 0 10px 25px rgba(13, 1, 102, 0.15);
+  font-size: 0.98rem;
+  font-weight: var(--font-bold, 700);
+  line-height: 1.55;
   text-align: center;
-
+  overflow-wrap: anywhere;
   transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
+    transform var(--home-transicao),
+    box-shadow var(--home-transicao),
+    background-color var(--home-transicao);
 }
 
-.admin-home-btn:hover {
-  background: var(--color-brand-red);
-  transform: scale(1.03);
-  box-shadow: 0 10px 24px rgba(163, 0, 0, 0.25);
+.admin-home-btn:active {
+  transform: scale(0.98);
 }
-
 
 /* =========================
-   RESPONSIVIDADE
-========================= */
+   10. EFEITOS DE MOUSE
+   ========================= */
+@media (hover: hover) and (pointer: fine) {
+  .botao-catalogo:hover {
+    transform: translateY(-3px);
+    background: #850000;
+    border-color: #850000;
+    box-shadow: 0 16px 32px rgba(163, 0, 0, 0.27);
+  }
+
+  .filtro-btn:hover {
+    transform: translateY(-5px);
+    border-color: var(--filtro-cor, var(--home-azul));
+    box-shadow: var(--home-sombra-hover);
+  }
+
+  .filtro-btn:hover::before {
+    left: 0;
+    right: 0;
+  }
+
+  .filtro-btn:hover :is(svg, i) {
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  .local-card:hover {
+    transform: translateY(-3px);
+    border-color: #d9d9ed;
+    box-shadow: var(--home-sombra-hover);
+  }
+
+  .carrossel-botao:not(:disabled):hover {
+    transform: translateY(-2px);
+    background: var(--home-azul);
+    color: var(--home-branco);
+    box-shadow: 0 9px 22px rgba(13, 1, 102, 0.19);
+  }
+
+  .admin-home-btn:hover {
+    transform: translateY(-4px);
+    background: var(--home-vermelho);
+    box-shadow: 0 15px 30px rgba(163, 0, 0, 0.22);
+  }
+}
+
+/* =========================
+   11. TABLETS — ALINHA COM O MENU GLOBAL
+   ========================= */
 @media screen and (max-width: 900px) {
   .hero-conteudo {
-    gap: 50px;
-    text-align: center;
-    padding: 30px 20px 20px;
     flex-direction: column-reverse;
     justify-content: center;
+    gap: 30px;
+    min-height: auto;
+    padding-block: 56px 72px;
+    text-align: center;
+  }
+
+  .hero-texto {
+    flex: initial;
+    width: 100%;
   }
 
   .hero-imagem-container {
-    max-width: 240px;
-    margin-right: 0;
-    margin-top: 30px;
+    flex: initial;
+    width: min(68%, 330px);
+    max-width: 330px;
   }
 
-  .hero-titulo,
+  .hero-titulo {
+    max-width: 19ch;
+    margin-inline: auto;
+  }
+
   .hero-descricao {
-    max-width: 100%;
+    max-width: 600px;
+    margin: 23px auto 30px;
   }
 
   .hero-acoes {
     justify-content: center;
   }
 
+  .filtros-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 650px;
+  }
+
   .filtro-btn {
-  width: 140px;
-  height: 140px;
+    min-height: 147px;
+  }
+
+  .admin-home-botoes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
- .local-card {
-    padding: 24px;
+/* =========================
+   12. CELULARES
+   ========================= */
+@media screen and (max-width: 600px) {
+  .hero-conteudo {
+    width: calc(100% - 36px);
+    gap: 24px;
+    padding-block: 42px 62px;
+  }
+
+  .hero-imagem-container {
+    width: min(70%, 245px);
+  }
+
+  .hero-titulo {
+    font-size: clamp(2.05rem, 8.6vw, 3rem);
+    letter-spacing: -0.04em;
+  }
+
+  .hero-descricao {
+    margin: 20px auto 28px;
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+
+  .botao-catalogo {
+    min-height: 52px;
+    padding: 14px 24px;
+  }
+
+  .secao-filtros {
+    padding: 42px 16px;
+  }
+
+  .filtros-container {
+    gap: 12px;
+  }
+
+  .filtro-btn {
+    gap: 10px;
+    min-height: 128px;
+    padding: 19px 11px;
+    border-radius: 18px;
+    font-size: 0.9rem;
+  }
+
+  .filtro-btn :is(svg, i) {
+    font-size: 1.9rem;
+  }
+
+  .filtro-btn img {
+    max-width: 46px;
+    max-height: 46px;
+  }
+
+  .secao-locais {
+    padding: 52px 16px 64px;
+  }
+
+  .locais-container {
+    gap: 24px;
+  }
+
+  .local-card {
+    padding: 19px;
+    border-radius: 20px;
+  }
+
+  .local-card::before {
+    left: 19px;
   }
 
   .local-nome {
     margin-bottom: 20px;
-
-    font-size: 1.8rem;
-    line-height: 1.2;
+    font-size: 1.45rem;
   }
 
   .carrossel-area {
-    gap: 10px;
+    gap: 7px;
   }
 
   .carrossel-imagem-container {
-    height: 250px;
+    aspect-ratio: 4 / 3;
+    border-radius: 13px;
   }
 
   .carrossel-botao {
+    flex-basis: 40px;
     width: 40px;
     height: 40px;
-
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .carrossel-indicadores {
-    gap: 8px;
-    margin: 16px 0 20px;
-  }
-
-  .indicador {
-    width: 9px;
-    height: 9px;
+    margin: 8px 0 18px;
   }
 
   .local-descricao {
-    font-size: var(--font-size-normal);
-    line-height: 1.6;
+    font-size: 0.94rem;
+    line-height: 1.8;
   }
 
   .local-horario {
-    font-size: 0.85rem;
+    font-size: 0.86rem;
   }
 
- .admin-home-botoes {
-    grid-template-columns: repeat(2, 1fr);
+  .secao-admin-home {
+    padding: 40px 16px 60px;
+  }
+
+  .admin-home-botoes {
+    gap: 12px;
+  }
+
+  .admin-home-btn {
+    min-height: 104px;
+    padding: 18px 12px;
+    border-radius: 16px;
+    font-size: 0.9rem;
   }
 }
 
-@media screen and (max-width: 480px) {
+/* =========================
+   13. CELULARES ESTREITOS
+   ========================= */
+@media screen and (max-width: 380px) {
+  .hero-conteudo {
+    width: calc(100% - 30px);
+  }
+
+  .hero-acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .botao-catalogo {
+    width: 100%;
+  }
+
+  .filtro-btn {
+    min-height: 116px;
+    padding: 15px 8px;
+    font-size: 0.84rem;
+  }
+
+  .local-card {
+    padding: 15px;
+  }
+
+  .local-card::before {
+    left: 15px;
+  }
+
+  .carrossel-area {
+    gap: 5px;
+  }
+
+  .carrossel-botao {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+
   .admin-home-botoes {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   14. ACESSIBILIDADE — MOVIMENTO REDUZIDO
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+
+  .botao-catalogo,
+  .filtro-btn,
+  .filtro-btn::before,
+  .filtro-btn :is(svg, i),
+  .local-card,
+  .carrossel-imagem,
+  .carrossel-botao,
+  .indicador::before,
+  .admin-home-btn {
+    transition: none;
+  }
+
+  .carrossel-imagem.trocando {
+    transform: none;
   }
 }
