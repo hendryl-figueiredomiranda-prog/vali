@@ -1,353 +1,537 @@
-/* =========================
-   GERENCIAMENTO DE LOCAIS
-========================= */
+/* ================================================================
+   GERENCIAMENTO DE LOCAIS — ESTILO INTEGRADO AO CSS GLOBAL
 
+   Carregue este arquivo depois de global-refinado.css.
+   Preserva todos os IDs e classes do CSS original.
+   Não altera o funcionamento da busca, edição ou exclusão.
+   ================================================================ */
+
+/* =========================
+   1. VARIÁVEIS DA PÁGINA
+   ========================= */
+:root {
+  --gerencia-azul: var(--color-brand-blue, #0d0166);
+  --gerencia-vermelho: var(--color-brand-red, #a30000);
+  --gerencia-branco: var(--color-white, #ffffff);
+  --gerencia-texto: var(--global-texto, #1d2738);
+  --gerencia-texto-suave: var(--global-texto-suave, #68768a);
+  --gerencia-borda: var(--global-borda, #e5eaf2);
+  --gerencia-superficie: #f7f9fd;
+  --gerencia-transicao: var(--global-transicao, 0.28s cubic-bezier(0.2, 0.75, 0.3, 1));
+  --gerencia-sombra: 0 24px 68px rgba(9, 14, 39, 0.11);
+}
+
+/* =========================
+   2. ÁREA PRINCIPAL
+   O CSS global já reserva espaço para o cabeçalho fixo no body.
+   ========================= */
 #main-crude-item {
-  min-height: 100vh;
-
-  padding: 140px 20px 80px;
-
+  position: relative;
+  isolation: isolate;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 60px;
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-#container-crude-item {
+  justify-content: center;
+  gap: clamp(28px, 4vw, 64px);
   width: 100%;
-  max-width: 850px;
-}
-
-#secao-crude-item {
-  padding: 56px;
-
-  background: var(--color-white);
-
-  border: 1px solid var(--color-brand-gray);
-  border-radius: 28px;
-
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.12);
-
+  min-height: calc(100vh - var(--global-header-height, 90px));
+  min-height: calc(100svh - var(--global-header-height, 90px));
+  padding: clamp(48px, 6vw, 90px) clamp(20px, 4vw, 54px);
+  overflow: hidden;
+  color: var(--gerencia-texto);
   font-family: "Poppins", sans-serif;
 }
 
+/* Detalhes decorativos discretos, sem esconder a textura do Global. */
+#main-crude-item::before,
+#main-crude-item::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+#main-crude-item::before {
+  top: -245px;
+  right: -205px;
+  width: 590px;
+  aspect-ratio: 1;
+  border: 84px solid rgba(13, 1, 102, 0.045);
+}
+
+#main-crude-item::after {
+  bottom: -265px;
+  left: -175px;
+  width: 450px;
+  aspect-ratio: 1;
+  border: 74px solid rgba(163, 0, 0, 0.032);
+}
 
 /* =========================
-   CABEÇALHO
-========================= */
+   3. CONTAINER E PAINEL
+   ========================= */
+#container-crude-item {
+  flex: 0 1 870px;
+  width: 100%;
+  max-width: 870px;
+  min-width: 0;
+}
 
+#secao-crude-item {
+  position: relative;
+  padding: clamp(28px, 4.4vw, 60px);
+  overflow: hidden;
+  border: 1px solid rgba(217, 225, 239, 0.94);
+  border-radius: 30px;
+  background: var(--gerencia-branco);
+  box-shadow: var(--gerencia-sombra), 0 4px 14px rgba(9, 14, 39, 0.035);
+  font-family: "Poppins", sans-serif;
+}
+
+/* Friso superior acompanha a identidade visual do cabeçalho. */
+#secao-crude-item::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--gerencia-azul), #615ab7 58%, var(--gerencia-vermelho));
+}
+
+/* =========================
+   4. CABEÇALHO DA PÁGINA
+   ========================= */
 #cabecalho-crude-item {
+  margin: 0 auto clamp(30px, 4vw, 46px);
   text-align: center;
-
-  margin-bottom: 42px;
 }
 
 #icone-crude-item {
-  width: 80px;
-  height: 80px;
-
-  margin: 0 auto 24px;
-
+  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  background: var(--color-brand-blue);
-  color: var(--color-white);
-
-  border-radius: var(--border-radius-circle);
-
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
+  background: linear-gradient(135deg, #16105b, var(--gerencia-azul) 64%, #4940a0);
+  box-shadow: 0 15px 28px rgba(13, 1, 102, 0.20), inset 0 1px rgba(255, 255, 255, 0.16);
+  color: var(--gerencia-branco);
   font-size: 2rem;
-
-  box-shadow:
-    0 10px 24px rgba(13, 1, 102, 0.25);
+  line-height: 1;
 }
 
 #cabecalho-crude-item h1 {
-  margin-bottom: 12px;
-
-  color: var(--color-brand-blue);
-
-  font-size: 2.4rem;
-  font-weight: var(--font-extrabold);
-
+  max-width: 22ch;
+  margin: 0 auto 14px;
+  color: var(--gerencia-azul);
+  font-size: clamp(1.9rem, 3vw, 2.65rem);
+  font-weight: var(--font-extrabold, 900);
   line-height: 1.2;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 #cabecalho-crude-item p {
   max-width: 600px;
-
   margin: 0 auto;
-
-  color: var(--color-black);
-
-  font-size: var(--font-size-normal);
-
-  line-height: 1.7;
+  color: var(--gerencia-texto-suave);
+  font-size: clamp(0.95rem, 1.15vw, 1.04rem);
+  font-weight: var(--font-regular, 400);
+  line-height: 1.8;
+  text-wrap: pretty;
 }
 
-
 /* =========================
-   BUSCA
-========================= */
-
+   5. BUSCA DE LOCAIS
+   ========================= */
 #form-editar-cadastro-item {
-  margin-bottom: 36px;
+  margin-bottom: 32px;
+  padding: clamp(18px, 2.5vw, 26px);
+  border: 1px solid var(--gerencia-borda);
+  border-radius: 21px;
+  background: linear-gradient(135deg, #f9faff 0%, #f3f5fc 100%);
 }
 
 #form-editar-cadastro-item label {
   display: block;
-
-  margin-bottom: 12px;
-
-  color: var(--color-brand-blue);
-
-  font-size: var(--font-size-small);
-  font-weight: var(--font-semibold);
+  margin: 0 0 10px;
+  color: var(--gerencia-azul);
+  font-size: 0.9rem;
+  font-weight: var(--font-semibold, 600);
+  line-height: 1.5;
 }
 
 .grupo-busca-item {
   display: flex;
-  gap: 14px;
+  align-items: stretch;
+  gap: 12px;
+  min-width: 0;
 }
 
 .grupo-busca-item input {
-  flex: 1;
-
-  padding: 14px 16px;
-
-  border: 2px solid var(--color-brand-gray);
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 13px 17px;
+  border: 1.5px solid #dbe1ed;
   border-radius: 14px;
-
-  font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-normal);
-
   outline: none;
-
+  background: var(--gerencia-branco);
+  color: var(--gerencia-texto);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.96rem;
+  line-height: 1.4;
+  box-shadow: 0 2px 5px rgba(9, 14, 39, 0.025);
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.2s ease;
+    border-color var(--gerencia-transicao),
+    box-shadow var(--gerencia-transicao),
+    background-color var(--gerencia-transicao);
 }
 
-.grupo-busca-item input:hover {
-  border-color: var(--color-brand-blue);
+.grupo-busca-item input::placeholder {
+  color: #8791a5;
+  opacity: 1;
 }
 
 .grupo-busca-item input:focus {
-  border-color: var(--color-brand-blue);
-
-  box-shadow:
-    0 0 0 4px rgba(13, 1, 102, 0.12);
-
-  transform: scale(1.01);
+  border-color: var(--gerencia-azul);
+  background: var(--gerencia-branco);
+  box-shadow: 0 0 0 4px rgba(13, 1, 102, 0.10);
 }
 
 .grupo-busca-item button {
-  padding: 14px 24px;
-
-  background: var(--color-brand-blue);
-  color: var(--color-white);
-
-  border-radius: var(--border-radius-medium);
-
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 9px;
+  min-height: 52px;
+  padding: 12px 25px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: var(--gerencia-azul);
+  color: var(--gerencia-branco);
   font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-bold);
-
+  font-size: 0.94rem;
+  font-weight: var(--font-bold, 700);
+  line-height: 1.35;
+  box-shadow: 0 9px 20px rgba(13, 1, 102, 0.17);
+  cursor: pointer;
   transition:
-    background 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform var(--gerencia-transicao),
+    background-color var(--gerencia-transicao),
+    box-shadow var(--gerencia-transicao);
 }
-
-.grupo-busca-item button:hover {
-  background: var(--color-brand-red);
-
-  transform: scale(1.03);
-
-  box-shadow:
-    0 10px 24px rgba(163, 0, 0, 0.25);
-}
-
 
 /* =========================
-   AÇÕES
-========================= */
-
+   6. AÇÕES DE GERENCIAMENTO
+   ========================= */
 .acoes-gerenciamento-item {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
+  min-width: 0;
 }
 
 .botao-gerenciamento {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-
+  justify-content: center;
+  gap: 12px;
   width: 100%;
-
-  padding: 16px 24px;
-
-  background: var(--color-brand-blue);
-  color: var(--color-white);
-
-  border-radius: var(--border-radius-medium);
-
+  min-height: 56px;
+  padding: 15px 25px;
+  border: 1px solid rgba(13, 1, 102, 0.08);
+  border-radius: 16px;
+  background: linear-gradient(110deg, #100853, var(--gerencia-azul) 65%, #251b7a);
+  color: var(--gerencia-branco);
   font-family: "Poppins", sans-serif;
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-bold);
-
+  font-size: 0.97rem;
+  font-weight: var(--font-bold, 700);
+  line-height: 1.4;
+  text-align: center;
   text-decoration: none;
-
+  box-shadow: 0 7px 20px rgba(13, 1, 102, 0.15);
+  cursor: pointer;
   transition:
-    background 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    transform var(--gerencia-transicao),
+    box-shadow var(--gerencia-transicao),
+    background-color var(--gerencia-transicao);
 }
-
-.botao-gerenciamento:hover {
-  background: var(--color-brand-red);
-
-  transform: scale(1.02);
-
-  box-shadow:
-    0 10px 24px rgba(163, 0, 0, 0.25);
-}
-
 
 /* =========================
-   IMAGEM
-========================= */
-
+   7. IMAGEM DECORATIVA
+   ========================= */
 #imagem-item-cadastro {
-  width: 100%;
+  display: block;
+  flex: 0 1 340px;
+  width: min(100%, 340px);
   max-width: 340px;
-
+  height: auto;
+  max-height: 72vh;
   object-fit: contain;
-
-  filter:
-    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 19px 26px rgba(9, 14, 39, 0.13));
+  animation: gerencia-flutuar 6s ease-in-out infinite;
 }
 
-.lista-localizacoes {
-  margin-top: 30px;
+@keyframes gerencia-flutuar {
 
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* =========================
+   8. LISTAGEM DE LOCALIZAÇÕES
+   ========================= */
+.lista-localizacoes {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+  min-width: 0;
+  margin-top: 30px;
 }
 
 .item-localizacao-gerenciamento {
-  background: white;
-
-  border-radius: 16px;
-
-  padding: 20px 24px;
-
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.08);
-
-  transition: transform 0.2s ease;
+  justify-content: space-between;
+  gap: clamp(16px, 2vw, 28px);
+  min-width: 0;
+  padding: 22px 24px;
+  border: 1px solid var(--gerencia-borda);
+  border-radius: 18px;
+  background: var(--gerencia-branco);
+  box-shadow: 0 6px 18px rgba(9, 14, 39, 0.045);
+  transition:
+    transform var(--gerencia-transicao),
+    border-color var(--gerencia-transicao),
+    box-shadow var(--gerencia-transicao);
 }
 
-.item-localizacao-gerenciamento:hover {
-  transform: translateY(-2px);
+/* Barra colorida na lateral ajuda a separar os registros. */
+.item-localizacao-gerenciamento::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 0;
+  width: 4px;
+  border-radius: 0 5px 5px 0;
+  background: linear-gradient(180deg, var(--gerencia-azul), #7770c4);
+}
+
+.info-localizacao-gerenciamento {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .info-localizacao-gerenciamento h3 {
-  margin-bottom: 8px;
-
-  color: var(--color-brand-blue);
-
-  font-size: 1.2rem;
+  margin: 0 0 8px;
+  color: var(--gerencia-azul);
+  font-size: clamp(1.06rem, 1.35vw, 1.2rem);
+  font-weight: var(--font-bold, 700);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .info-localizacao-gerenciamento p {
-  margin-bottom: 4px;
-
-  font-weight: 600;
-
-  color: #666;
+  margin: 0 0 5px;
+  color: var(--gerencia-texto);
+  font-size: 0.9rem;
+  font-weight: var(--font-medium, 500);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .info-localizacao-gerenciamento span {
-  color: #888;
+  color: var(--gerencia-texto-suave);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
+/* =========================
+   9. BOTÕES EDITAR E EXCLUIR
+   Mantêm a semântica: azul = editar, vermelho = excluir.
+   ========================= */
 .acoes-localizacao-gerenciamento {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.botao-editar-localizacao,
+.botao-excluir-localizacao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 11px 17px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--gerencia-branco);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  font-weight: var(--font-semibold, 600);
+  line-height: 1.25;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform var(--gerencia-transicao),
+    background-color var(--gerencia-transicao),
+    box-shadow var(--gerencia-transicao);
 }
 
 .botao-editar-localizacao {
   background: #1565c0;
-
-  color: white;
-
-  border: none;
-
-  padding: 10px 18px;
-
-  border-radius: 8px;
-
-  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(21, 101, 192, 0.16);
 }
 
 .botao-excluir-localizacao {
   background: #c62828;
-
-  color: white;
-
-  border: none;
-
-  padding: 10px 18px;
-
-  border-radius: 8px;
-
-  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(198, 40, 40, 0.16);
 }
 
+/* =========================
+   10. ESTADOS DE INTERAÇÃO
+   ========================= */
+#main-crude-item :is(a, button, input):focus-visible {
+  outline: 3px solid #807cce;
+  outline-offset: 3px;
+}
+
+#main-crude-item :is(button, a)[disabled],
+#main-crude-item :is(button, a)[aria-disabled="true"] {
+  opacity: 0.56;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .grupo-busca-item input:hover:not(:focus) {
+    border-color: #a6a2d0;
+  }
+
+  .grupo-busca-item button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #241577;
+    box-shadow: 0 12px 25px rgba(13, 1, 102, 0.24);
+  }
+
+  .botao-gerenciamento:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 13px 30px rgba(13, 1, 102, 0.23);
+  }
+
+  .item-localizacao-gerenciamento:hover {
+    transform: translateY(-3px);
+    border-color: #d0cdea;
+    box-shadow: 0 13px 28px rgba(9, 14, 39, 0.095);
+  }
+
+  .botao-editar-localizacao:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #0d529e;
+    box-shadow: 0 9px 20px rgba(21, 101, 192, 0.22);
+  }
+
+  .botao-excluir-localizacao:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #a71b1b;
+    box-shadow: 0 9px 20px rgba(198, 40, 40, 0.22);
+  }
+}
+
+#main-crude-item :is(button, .botao-gerenciamento):active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+}
 
 /* =========================
-   RESPONSIVIDADE
-========================= */
-
-@media screen and (max-width: 1000px) {
-
+   11. NOTEBOOKS E TELAS MÉDIAS
+   ========================= */
+@media screen and (max-width: 1150px) {
   #main-crude-item {
-    flex-direction: column;
-
     gap: 32px;
+  }
 
-    padding: 120px 20px 60px;
+  #container-crude-item {
+    flex-basis: 820px;
   }
 
   #imagem-item-cadastro {
-    max-width: 260px;
+    flex-basis: 270px;
+    width: min(100%, 270px);
   }
 }
 
-@media screen and (max-width: 768px) {
+/* =========================
+   12. TABLETS
+   ========================= */
+@media screen and (max-width: 1000px) {
+  #main-crude-item {
+    flex-direction: column;
+    gap: 36px;
+    padding: 48px 20px 64px;
+  }
 
+  #container-crude-item {
+    flex: initial;
+    width: 100%;
+    max-width: 760px;
+  }
+
+  #imagem-item-cadastro {
+    flex: initial;
+    width: min(58%, 270px);
+    max-width: 270px;
+    max-height: none;
+    margin-inline: auto;
+  }
+}
+
+/* =========================
+   13. CELULARES
+   ========================= */
+@media screen and (max-width: 680px) {
   #secao-crude-item {
-    padding: 36px 24px;
+    padding: 32px 22px;
+    border-radius: 24px;
+  }
+
+  #cabecalho-crude-item {
+    margin-bottom: 30px;
+  }
+
+  #icone-crude-item {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+    border-radius: 22px;
+    font-size: 1.8rem;
   }
 
   #cabecalho-crude-item h1 {
-    font-size: 2rem;
+    font-size: clamp(1.7rem, 6vw, 2.15rem);
+  }
+
+  #form-editar-cadastro-item {
+    padding: 18px;
+    border-radius: 17px;
   }
 
   .grupo-busca-item {
@@ -357,22 +541,88 @@
   .grupo-busca-item button {
     width: 100%;
   }
+
+  .item-localizacao-gerenciamento {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .acoes-localizacao-gerenciamento {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .acoes-localizacao-gerenciamento> :is(button, a) {
+    flex: 1 1 125px;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  #main-crude-item {
+    gap: 26px;
+    padding: 34px 14px 48px;
+  }
 
   #secao-crude-item {
-    padding: 28px 18px;
+    padding: 28px 17px;
+    border-radius: 21px;
   }
 
   #cabecalho-crude-item h1 {
-    font-size: 1.7rem;
+    font-size: 1.75rem;
   }
 
-  #icone-crude-item {
-    width: 68px;
-    height: 68px;
+  #cabecalho-crude-item p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
 
-    font-size: 1.7rem;
+  #form-editar-cadastro-item {
+    padding: 15px;
+  }
+
+  .botao-gerenciamento {
+    min-height: 54px;
+    padding-inline: 14px;
+    font-size: 0.92rem;
+  }
+
+  .item-localizacao-gerenciamento {
+    padding: 19px 17px;
+    border-radius: 15px;
+  }
+
+  .acoes-localizacao-gerenciamento {
+    gap: 8px;
+  }
+
+  .botao-editar-localizacao,
+  .botao-excluir-localizacao {
+    padding: 11px 13px;
+    font-size: 0.84rem;
+  }
+
+  #imagem-item-cadastro {
+    width: min(70%, 220px);
+  }
+}
+
+/* =========================
+   14. ACESSIBILIDADE
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  #imagem-item-cadastro {
+    animation: none;
+  }
+
+  .grupo-busca-item input,
+  .grupo-busca-item button,
+  .botao-gerenciamento,
+  .item-localizacao-gerenciamento,
+  .botao-editar-localizacao,
+  .botao-excluir-localizacao {
+    transition: none;
   }
 }
